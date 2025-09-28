@@ -1,0 +1,11 @@
+{
+  "name": "yt-downloader-vercel",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd youtube-downloader && npm install && npm run build",
+    "dev": "cd youtube-downloader && npm run dev"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
+}

@@ -41,13 +41,14 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get video info');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get video info');
       }
 
       const data = await response.json();
       setVideoInfo(data);
     } catch (err) {
-      setError('Error getting video info: ' + (err as Error).message);
+      setError((err as Error).message);
     } finally {
       setLoading(false);
     }
@@ -72,7 +73,8 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error('Download failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Download failed');
       }
 
       const blob = await response.blob();
@@ -85,7 +87,7 @@ function App() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (err) {
-      setError('Download failed: ' + (err as Error).message);
+      setError((err as Error).message);
     } finally {
       setLoading(false);
     }

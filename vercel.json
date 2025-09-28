@@ -1,0 +1,29 @@
+{
+  "functions": {
+    "api/get-info.js": {
+      "maxDuration": 30
+    },
+    "api/download.js": {
+      "maxDuration": 60
+    }
+  },
+  "builds": [
+    {
+      "src": "youtube-downloader/src/**/*",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "youtube-downloader/build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/youtube-downloader/build/$1"
+    }
+  ]
+}
